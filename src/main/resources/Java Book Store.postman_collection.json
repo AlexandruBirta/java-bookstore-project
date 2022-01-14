@@ -1,0 +1,1547 @@
+{
+	"info": {
+		"_postman_id": "99377fbb-07a3-4036-b1de-67e1b8d94c45",
+		"name": "Java Book Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Account API",
+			"item": [
+				{
+					"name": "Create Account",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"Popescu\",\r\n    \"lastName\":\"Ion\",\r\n    \"email\":\"popescu.ion@email.com\"\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/accounts",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account By Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"accountId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"accountId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/accounts/{{accountId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"accounts",
+								"{{accountId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"accountId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"accountId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/accounts/{{accountId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"accounts",
+								"{{accountId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book API",
+			"item": [
+				{
+					"name": "Create Book",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"To Kill a Mockingbird\",\r\n    \"description\":\"To Kill a Mockingbird has become a classic of modern American literature, winning the Pulitzer Prize.\",\r\n    \"genre\":\"novel\",\r\n    \"isbn\":\"063122581-1\",\r\n    \"author\":{\r\n        \"id\":1\r\n    },\r\n    \"publisher\":{\r\n        \"id\":1\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/books",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book By Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"bookId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"bookId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/books/{{bookId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"books",
+								"{{bookId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Books",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/books",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books By Genre",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"genre\", \"novel\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"genre\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/books/genre/{{genre}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"books",
+								"genre",
+								"{{genre}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books By Author",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"authorFirstName\", \"Popescu\");\r",
+									"pm.globals.set(\"authorLastName\", \"Ion\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"authorFirstName\");\r",
+									"pm.globals.unset(\"authorLastName\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/books/author/{{authorFirstName}}{{authorLastName}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"books",
+								"author",
+								"{{authorFirstName}}{{authorLastName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books By Publisher",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"publisherName\", \"Popescu\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"publisherName\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/books/publisher/{{publisherName}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"books",
+								"publisher",
+								"{{publisherName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"bookId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"bookId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/books/{{bookId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"books",
+								"{{bookId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Audio Book API",
+			"item": [
+				{
+					"name": "Create Audio Book",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"To Kill a Mockingbird\",\r\n    \"description\":\"To Kill a Mockingbird has become a classic of modern American literature, winning the Pulitzer Prize.\",\r\n    \"genre\":\"novel\",\r\n    \"isbn\":\"024703145-3\",\r\n     \"author\":{\r\n        \"id\":1\r\n    },\r\n    \"publisher\":{\r\n        \"id\":1\r\n    },\r\n    \"narrator\":{\r\n       \"id\":1\r\n    },\r\n    \"durationInMinutes\": 502\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/audioBooks",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"audioBooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Audio Book By Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"audioBookId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"audioBookId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/audioBooks/{{audioBookId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"audioBooks",
+								"{{audioBookId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Audio Books",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/audioBooks",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"audioBooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Audio Books By Genre",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"genre\", \"novel\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"genre\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/audioBooks/genre/{{genre}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"audioBooks",
+								"genre",
+								"{{genre}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Audio Books By Author",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"authorFirstName\", \"Popescu\");\r",
+									"pm.globals.set(\"authorLastName\", \"Ion\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"authorFirstName\");\r",
+									"pm.globals.unset(\"authorLastName\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/audioBooks/author/{{authorFirstName}}{{authorLastName}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"audioBooks",
+								"author",
+								"{{authorFirstName}}{{authorLastName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Audio Books By Narrator",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"narratorFirstName\", \"Popescu\");\r",
+									"pm.globals.set(\"narratorLastName\", \"Ion\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"narratorFirstName\");\r",
+									"pm.globals.unset(\"narratorLastName\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/audioBooks/narrator/{{narratorFirstName}}{{narratorLastName}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"audioBooks",
+								"narrator",
+								"{{narratorFirstName}}{{narratorLastName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Audio Books By Publisher",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"publisherName\", \"Popescu\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"publisherName\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/audioBooks/publisher/{{publisherName}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"audioBooks",
+								"publisher",
+								"{{publisherName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Audio Book",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"audioBookId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"audioBookId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/audioBooks/{{audioBookId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"audioBooks",
+								"{{audioBookId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Review API",
+			"item": [
+				{
+					"name": "Make Review",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"account\": {\r\n        \"id\":1\r\n    },\r\n    \"book\":{\r\n        \"id\":1\r\n    },\r\n    \"title\":\"A great book\",\r\n    \"content\":\"I very much enjoyed this book.\",\r\n    \"rating\":\"good\"\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/reviews",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction API",
+			"item": [
+				{
+					"name": "Make Rental Transaction",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"accountId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"accountId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"bookRental\",\r\n    \"cost\": 299.99,\r\n    \"rentalTime\": 15,\r\n    \"account\": {\r\n        \"id\":1\r\n    },\r\n    \"book\":{\r\n        \"id\":1\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/transactions",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make Subscription Transaction",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"accountId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"accountId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"bookSubscription\",\r\n    \"cost\": 500,\r\n    \"subscriptionDurationInMonths\":2,\r\n    \"subscriptionGenre\": \"novel\",\r\n    \"account\": {\r\n        \"id\":1\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/transactions",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make Audio Book Subscription Transaction",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"accountId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"accountId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"audioBookSubscription\",\r\n    \"subscriptionGenre\":\"novel\",\r\n    \"cost\": 700,\r\n    \"subscriptionDurationInMonths\":12,\r\n    \"account\": {\r\n        \"id\":1\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/transactions",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make Purchase Transaction",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"accountId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"accountId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"bookPurchase\",\r\n    \"cost\": 35.59,\r\n    \"account\": {\r\n        \"id\":1\r\n    },\r\n    \"book\":{\r\n        \"id\":1\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/transactions",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Author API",
+			"item": [
+				{
+					"name": "Create Author",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"Harper\",\r\n    \"lastName\":\"Lee\"\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/authors",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Author By Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"authorId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"authorId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/authors/{{authorId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"authors",
+								"{{authorId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Author",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"authorId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"authorId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/authors/{{authorId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"authors",
+								"{{authorId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Publisher API",
+			"item": [
+				{
+					"name": "Create Publisher",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Penguin Books\",\r\n    \"description\":\"Penguin Books was originally a British publishing house. It was co-founded in 1935 by Sir Allen Lane with his brothers Richard and John, as a line of the publishers The Bodley Head, only becoming a separate company the following year.\"\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/publishers",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"publishers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Publisher By Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"publisherId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"publisherId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/publishers/{{publisherId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"publishers",
+								"{{publisherId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Publisher",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"publisherId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"publisherId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/publishers/{{publisherId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"publishers",
+								"{{publisherId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Narrator API",
+			"item": [
+				{
+					"name": "Create Narrator",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"Scott\",\r\n    \"lastName\":\"Brick\"\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/narrators",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"narrators"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Narrator By Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"narratorId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"narratorId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/narrators/{{narratorId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"narrators",
+								"{{narratorId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Narrator",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"narratorId\", \"1\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"narratorId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{apiEndpoint}}/narrators/{{narratorId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{apiEndpoint}}",
+								"narrators",
+								"{{narratorId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
