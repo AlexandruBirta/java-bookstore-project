@@ -21,7 +21,7 @@ public class SwaggerDocumentationConfig {
                 .externalDocs(
                         new ExternalDocumentation()
                                 .description("Project github repository")
-                                .url("")
+                                .url("https://github.com/AlexandruBirta/java-bookstore-project")
                 );
 
     }
