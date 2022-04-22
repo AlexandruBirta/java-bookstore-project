@@ -22,7 +22,7 @@ public interface NarratorApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful operation"),
             @ApiResponse(responseCode = "400", description = "Narrator already exists", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)))})
-    @PutMapping(value = "/narrators",
+    @PostMapping(value = "/narrators",
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     void createNarrator(@Parameter(description = "Supplied Narrator for creation", required = true) @RequestBody Narrator narrator);

@@ -54,4 +54,15 @@ public class AccountService {
 
     }
 
+    @Transactional
+    public void updateEmail(Long accountId, String email) {
+
+        Account accountToUpdate = accountRepository.findById(accountId).orElseThrow(
+                () -> new ApiException(ExceptionStatus.ACCOUNT_NOT_FOUND, String.valueOf(accountId)));
+
+        accountToUpdate.setEmail(email);
+        log.info("Updated email to '" + email + "' for account with id '" + accountId + "'");
+
+    }
+
 }

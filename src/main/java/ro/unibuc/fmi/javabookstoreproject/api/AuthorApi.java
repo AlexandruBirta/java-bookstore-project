@@ -22,7 +22,7 @@ public interface AuthorApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful operation"),
             @ApiResponse(responseCode = "400", description = "Author already exists", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)))})
-    @PutMapping(value = "/authors",
+    @PostMapping(value = "/authors",
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     void createAuthor(@Parameter(description = "Supplied Author for creation", required = true) @RequestBody Author author);

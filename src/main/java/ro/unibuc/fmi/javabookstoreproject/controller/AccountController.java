@@ -31,4 +31,9 @@ public class AccountController implements AccountApi {
         accountService.deleteAccount(accountId);
     }
 
+    @Override
+    public void updateEmail(Long accountId, String email) {
+        accountService.updateEmail(accountId, email);
+    }
+
 }

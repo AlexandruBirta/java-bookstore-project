@@ -22,7 +22,7 @@ public interface AccountApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful operation"),
             @ApiResponse(responseCode = "400", description = "Account already exists", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)))})
-    @PutMapping(value = "/accounts",
+    @PostMapping(value = "/accounts",
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     void createAccount(@Parameter(description = "Supplied Account for creation", required = true) @RequestBody Account account);
@@ -44,5 +44,14 @@ public interface AccountApi {
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     void deleteAccount(@Parameter(description = "ID of deleted account", required = true) @PathVariable("accountId") Long accountId);
+
+    @Operation(summary = "Updates email of an account", operationId = "updateEmail", tags = {"accounts"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "404", description = "Account not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)))})
+    @PutMapping(value = "/accounts/{accountId}",
+            produces = {"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    void updateEmail(@Parameter(description = "ID of deleted account", required = true) @PathVariable("accountId") Long accountId, @Parameter(description = "New email", required = true) @RequestParam("email") String email);
 
 }

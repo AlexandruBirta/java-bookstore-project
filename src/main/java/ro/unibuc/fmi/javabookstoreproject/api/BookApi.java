@@ -24,7 +24,7 @@ public interface BookApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful operation"),
             @ApiResponse(responseCode = "400", description = "Book already exists", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)))})
-    @PutMapping(value = "/books",
+    @PostMapping(value = "/books",
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     void createBook(@Parameter(description = "Supplied Book for creation", required = true) @RequestBody Book book);
