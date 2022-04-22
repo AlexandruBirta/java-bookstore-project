@@ -22,7 +22,7 @@ public interface PublisherApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful operation"),
             @ApiResponse(responseCode = "400", description = "Publisher already exists", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)))})
-    @PutMapping(value = "/publishers",
+    @PostMapping(value = "/publishers",
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     void createPublisher(@Parameter(description = "Supplied Publisher for creation", required = true) @RequestBody Publisher publisher);

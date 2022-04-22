@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,6 +35,18 @@ public class Narrator {
     @Schema(maximum = "50", required = true)
     @Column(nullable = false)
     private String lastName;
+
+    @Schema(required = true)
+    @JoinColumn(
+            name = "narrator_id",
+            referencedColumnName = "id"
+    )
+    @OneToMany(
+            targetEntity = AudioBook.class,
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.MERGE
+    )
+    private List<AudioBook> audioBook;
 
     @Schema
     @Column(nullable = false)

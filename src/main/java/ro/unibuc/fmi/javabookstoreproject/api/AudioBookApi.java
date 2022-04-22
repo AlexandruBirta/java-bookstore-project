@@ -24,7 +24,7 @@ public interface AudioBookApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful operation"),
             @ApiResponse(responseCode = "400", description = "AudioBook already exists", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)))})
-    @PutMapping(value = "/audioBooks",
+    @PostMapping(value = "/audioBooks",
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     void createAudioBook(@Parameter(description = "Supplied AudioBook for creation", required = true) @RequestBody AudioBook audioBook);

@@ -34,4 +34,4 @@ host: "localhost:8080", apiEndpoint: "v1"
 
 <h4>Swagger Documentation:</h4>
 
-http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
+http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/#
