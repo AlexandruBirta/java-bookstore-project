@@ -95,7 +95,7 @@ class AudioBookServiceTest {
                 .id(1L)
                 .name("To Kill a Mockingbird")
                 .description("To Kill a Mockingbird has become a classic of modern American literature, winning the Pulitzer Prize. The plot and characters are loosely based on Lee's observations of her family, her neighbors and an event that occurred near her hometown of Monroeville, Alabama, in 1936, when she was ten.")
-                .genre(Book.Genre.NOVEL)
+                .genre(Genre.NOVEL)
                 .isbn("063122581-1")
                 .author(testAuthorOne)
                 .publisher(testPublisherOne)
@@ -109,7 +109,7 @@ class AudioBookServiceTest {
                 .id(2L)
                 .name("The Hound of the Baskervilles")
                 .description("The Hound of the Baskervilles is the third of the four crime novels written by Sir Arthur Conan Doyle featuring the detective Sherlock Holmes. Originally serialised in The Strand Magazine from August 1901 to April 1902, it is set largely on Dartmoor in Devon in England's West Country and tells the story of an attempted murder inspired by the legend of a fearsome, diabolical hound of supernatural origin. Sherlock Holmes and his companion Dr. Watson investigate the case. ")
-                .genre(Book.Genre.MYSTERY)
+                .genre(Genre.MYSTERY)
                 .isbn("538363100-3")
                 .author(testAuthorTwo)
                 .publisher(testPublisherTwo)
@@ -165,7 +165,7 @@ class AudioBookServiceTest {
 
         audioBookListByGenre.add(testAudioBookTwo);
 
-        String genre = Book.Genre.MYSTERY.getValue();
+        String genre = Genre.MYSTERY.getValue();
 
         Mockito.when(audioBookRepository.findAllByGenre(genre)).thenReturn(audioBookListByGenre);
 

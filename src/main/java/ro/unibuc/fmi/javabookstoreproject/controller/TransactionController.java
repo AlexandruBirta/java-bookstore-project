@@ -2,7 +2,9 @@ package ro.unibuc.fmi.javabookstoreproject.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import ro.unibuc.fmi.javabookstoreproject.api.TransactionApi;
 import ro.unibuc.fmi.javabookstoreproject.model.AccountBook;
 import ro.unibuc.fmi.javabookstoreproject.model.Transaction;
@@ -10,8 +12,10 @@ import ro.unibuc.fmi.javabookstoreproject.quartz.QuartzService;
 import ro.unibuc.fmi.javabookstoreproject.service.AccountBookService;
 import ro.unibuc.fmi.javabookstoreproject.service.TransactionService;
 
+import javax.validation.Valid;
+
 @Slf4j
-@RestController
+@Controller
 public class TransactionController implements TransactionApi {
 
     private final TransactionService transactionService;
@@ -26,7 +30,7 @@ public class TransactionController implements TransactionApi {
     }
 
     @Override
-    public void makeTransaction(Transaction transaction) {
+    public String makeTransaction(@ModelAttribute @Valid Transaction transaction) {
         Transaction savedTransaction = transactionService.makeTransaction(transaction);
         log.info("Created " + savedTransaction);
 
@@ -36,7 +40,7 @@ public class TransactionController implements TransactionApi {
                 AccountBook purchaseAccountBook = AccountBook.builder()
                         .account(savedTransaction.getAccount())
                         .book(savedTransaction.getBook())
-                        .rentalDurationInDays(transaction.getRentalTime())
+                        .rentalDurationInDays(transaction.getRentalTimeInDays())
                         .subscriptionDurationInMonths(transaction.getSubscriptionDurationInMonths())
                         .build();
                 accountBookService.createAccountBook(purchaseAccountBook);
@@ -46,7 +50,7 @@ public class TransactionController implements TransactionApi {
                 AccountBook rentalAccountBook = AccountBook.builder()
                         .account(savedTransaction.getAccount())
                         .book(savedTransaction.getBook())
-                        .rentalDurationInDays(transaction.getRentalTime())
+                        .rentalDurationInDays(transaction.getRentalTimeInDays())
                         .subscriptionDurationInMonths(transaction.getSubscriptionDurationInMonths())
                         .build();
                 accountBookService.createAccountBook(rentalAccountBook);
@@ -62,6 +66,13 @@ public class TransactionController implements TransactionApi {
                 break;
         }
 
+        return "create_transaction.html";
+    }
+
+    @Override
+    public String makeTransaction(Model model) {
+        model.addAttribute("transaction", new Transaction());
+        return "create_transaction.html";
     }
 
 }

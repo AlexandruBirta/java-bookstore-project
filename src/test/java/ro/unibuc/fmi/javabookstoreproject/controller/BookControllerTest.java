@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import ro.unibuc.fmi.javabookstoreproject.model.Author;
 import ro.unibuc.fmi.javabookstoreproject.model.Book;
+import ro.unibuc.fmi.javabookstoreproject.model.Genre;
 import ro.unibuc.fmi.javabookstoreproject.model.Publisher;
 import ro.unibuc.fmi.javabookstoreproject.repository.BookRepository;
 import ro.unibuc.fmi.javabookstoreproject.service.BookService;
@@ -94,7 +96,7 @@ public class BookControllerTest {
                 .id(1L)
                 .name("To Kill a Mockingbird")
                 .description("To Kill a Mockingbird has become a classic of modern American literature, winning the Pulitzer Prize. The plot and characters are loosely based on Lee's observations of her family, her neighbors and an event that occurred near her hometown of Monroeville, Alabama, in 1936, when she was ten.")
-                .genre(Book.Genre.NOVEL)
+                .genre(Genre.NOVEL)
                 .isbn("063122581-1")
                 .author(testAuthorOne)
                 .publisher(testPublisherOne)
@@ -106,7 +108,7 @@ public class BookControllerTest {
                 .id(2L)
                 .name("The Hound of the Baskervilles")
                 .description("The Hound of the Baskervilles is the third of the four crime novels written by Sir Arthur Conan Doyle featuring the detective Sherlock Holmes. Originally serialised in The Strand Magazine from August 1901 to April 1902, it is set largely on Dartmoor in Devon in England's West Country and tells the story of an attempted murder inspired by the legend of a fearsome, diabolical hound of supernatural origin. Sherlock Holmes and his companion Dr. Watson investigate the case. ")
-                .genre(Book.Genre.MYSTERY)
+                .genre(Genre.MYSTERY)
                 .isbn("538363100-3")
                 .author(testAuthorTwo)
                 .publisher(testPublisherTwo)
@@ -127,7 +129,7 @@ public class BookControllerTest {
         ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
         String requestJson = objectWriter.writeValueAsString(testBookOne);
 
-        mockMvc.perform(put(endpoint).contentType(APPLICATION_JSON_UTF8).content(requestJson))
+        mockMvc.perform(post(endpoint).contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -152,32 +154,35 @@ public class BookControllerTest {
     @Test
     void testGetBooks() throws Exception {
 
-        String endpoint = "/v1/books";
+        int pageIndex = 1;
+        int pageSize = 10;
+
+        String endpoint = "/v1/books?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
 
         List<Book> bookList = new ArrayList<>();
         bookList.add(testBookOne);
         bookList.add(testBookTwo);
 
-        when(bookService.getBooks()).thenReturn(bookList);
+        when(bookService.getBooks(pageIndex, pageSize)).thenReturn(new PageImpl<>(bookList));
 
         mockMvc.perform(get(endpoint).contentType(APPLICATION_JSON_UTF8))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").exists())
-                .andExpect(jsonPath("$[0].name").value("To Kill a Mockingbird"))
-                .andExpect(jsonPath("$[0].description").value("To Kill a Mockingbird has become a classic of modern American literature, winning the Pulitzer Prize. The plot and characters are loosely based on Lee's observations of her family, her neighbors and an event that occurred near her hometown of Monroeville, Alabama, in 1936, when she was ten."))
-                .andExpect(jsonPath("$[0].genre").value("novel"))
-                .andExpect(jsonPath("$[1].id").exists())
-                .andExpect(jsonPath("$[1].name").value("The Hound of the Baskervilles"))
-                .andExpect(jsonPath("$[1].description").value("The Hound of the Baskervilles is the third of the four crime novels written by Sir Arthur Conan Doyle featuring the detective Sherlock Holmes. Originally serialised in The Strand Magazine from August 1901 to April 1902, it is set largely on Dartmoor in Devon in England's West Country and tells the story of an attempted murder inspired by the legend of a fearsome, diabolical hound of supernatural origin. Sherlock Holmes and his companion Dr. Watson investigate the case. "))
-                .andExpect(jsonPath("$[1].genre").value("mystery"));
+                .andExpect(jsonPath("$.content.[0].id").exists())
+                .andExpect(jsonPath("$.content.[0].name").value("To Kill a Mockingbird"))
+                .andExpect(jsonPath("$.content.[0].description").value("To Kill a Mockingbird has become a classic of modern American literature, winning the Pulitzer Prize. The plot and characters are loosely based on Lee's observations of her family, her neighbors and an event that occurred near her hometown of Monroeville, Alabama, in 1936, when she was ten."))
+                .andExpect(jsonPath("$.content.[0].genre").value("novel"))
+                .andExpect(jsonPath("$.content.[1].id").exists())
+                .andExpect(jsonPath("$.content.[1].name").value("The Hound of the Baskervilles"))
+                .andExpect(jsonPath("$.content.[1].description").value("The Hound of the Baskervilles is the third of the four crime novels written by Sir Arthur Conan Doyle featuring the detective Sherlock Holmes. Originally serialised in The Strand Magazine from August 1901 to April 1902, it is set largely on Dartmoor in Devon in England's West Country and tells the story of an attempted murder inspired by the legend of a fearsome, diabolical hound of supernatural origin. Sherlock Holmes and his companion Dr. Watson investigate the case. "))
+                .andExpect(jsonPath("$.content.[1].genre").value("mystery"));
 
     }
 
     @Test
     void testGetBooksByGenre() throws Exception {
 
-        String genre = Book.Genre.MYSTERY.getValue();
+        Genre genre = Genre.MYSTERY;
 
         String endpoint = "/v1/books/genre/" + genre;
 

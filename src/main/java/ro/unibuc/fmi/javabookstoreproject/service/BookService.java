@@ -2,11 +2,15 @@ package ro.unibuc.fmi.javabookstoreproject.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.unibuc.fmi.javabookstoreproject.exception.ApiException;
 import ro.unibuc.fmi.javabookstoreproject.exception.ExceptionStatus;
 import ro.unibuc.fmi.javabookstoreproject.model.Book;
+import ro.unibuc.fmi.javabookstoreproject.model.Genre;
 import ro.unibuc.fmi.javabookstoreproject.repository.BookRepository;
 
 import java.util.List;
@@ -43,11 +47,12 @@ public class BookService {
                 () -> new ApiException(ExceptionStatus.BOOK_NOT_FOUND, String.valueOf(bookId)));
     }
 
-    public List<Book> getBooks() {
+    public Page<Book> getBooks(int pageIndex, int pageSize) {
 
-        List<Book> repoBooks = bookRepository.findAll();
+        PageRequest pageRequest = PageRequest.of(pageIndex, pageSize, Sort.by("id").descending());
+        Page<Book> repoBooks = bookRepository.findAllPaginated(pageRequest);
 
-        if (repoBooks.isEmpty()) {
+        if (repoBooks.getContent().isEmpty()) {
             throw new ApiException(ExceptionStatus.NO_BOOKS_FOUND, "all books");
         }
 
@@ -55,7 +60,7 @@ public class BookService {
 
     }
 
-    public List<Book> getBooksByGenre(String genre) {
+    public List<Book> getBooksByGenre(Genre genre) {
 
         List<Book> repoBooksByGenre = bookRepository.findAllByGenre(genre);
 

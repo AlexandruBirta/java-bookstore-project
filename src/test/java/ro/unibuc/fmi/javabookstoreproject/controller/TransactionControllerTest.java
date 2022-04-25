@@ -94,7 +94,7 @@ public class TransactionControllerTest {
                 .id(1L)
                 .name("To Kill a Mockingbird")
                 .description("To Kill a Mockingbird has become a classic of modern American literature, winning the Pulitzer Prize. The plot and characters are loosely based on Lee's observations of her family, her neighbors and an event that occurred near her hometown of Monroeville, Alabama, in 1936, when she was ten.")
-                .genre(Book.Genre.NOVEL)
+                .genre(Genre.NOVEL)
                 .isbn("063122581-1")
                 .author(testAuthor)
                 .publisher(testPublisher)
@@ -105,7 +105,7 @@ public class TransactionControllerTest {
         testTransaction = Transaction.builder()
                 .account(testAccount)
                 .book(testBook)
-                .type(Transaction.Type.BOOK_PURCHASE)
+                .type(TransactionType.BOOK_PURCHASE)
                 .cost(new BigDecimal("59.99"))
                 .build();
 
