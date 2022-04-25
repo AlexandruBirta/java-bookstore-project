@@ -1,0 +1,447 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+<label class="form-label" style="margin-left: 10px; margin-top: 10px;">Account API</label>
+<div style="margin-left: 10px; margin-top: 10px;">
+    <a href="/v1/accounts/new" class="btn btn-warning">Create Account</a>
+    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#getAccountByIdModal">Get Account By Id</a>
+    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateAccountEmailModal">Update Account Email</a>
+    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountByIdModal">Delete Account By Id</a>
+</div>
+
+<label class="form-label" style="margin-left: 10px; margin-top: 10px;">Author API</label>
+<div style="margin-left: 10px; margin-top: 10px;">
+    <a href="/v1/authors/new" class="btn btn-warning">Create Author</a>
+    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#getAuthorByIdModal">Get Author By Id</a>
+    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAuthorByIdModal">Delete Author By Id</a>
+</div>
+
+<label class="form-label" style="margin-left: 10px; margin-top: 10px;">Publisher API</label>
+<div style="margin-left: 10px; margin-top: 10px;">
+    <a href="/v1/publishers/new" class="btn btn-warning">Create Publisher</a>
+    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#getPublisherByIdModal">Get Publisher By Id</a>
+    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePublisherByIdModal">Delete Publisher By
+        Id</a>
+</div>
+
+<label class="form-label" style="margin-left: 10px; margin-top: 10px;">Book API</label>
+<div style="margin-left: 10px; margin-top: 10px;">
+    <a href="/v1/books/new/" class="btn btn-warning">Create Book</a>
+    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#getBookByIdModal">Get Book By Id</a>
+    <a href="/v1/books?pageIndex=0&pageSize=10" class="btn btn-success">Get All Books</a>
+    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#getBooksByGenreModal">Get Books By Genre</a>
+    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBookByIdModal">Delete Book By Id</a>
+</div>
+
+<label class="form-label" style="margin-left: 10px; margin-top: 10px;">Review API</label>
+<div style="margin-left: 10px; margin-top: 10px;">
+    <a href="/v1/reviews/new" class="btn btn-warning">Create Review</a>
+</div>
+
+<label class="form-label" style="margin-left: 10px; margin-top: 10px;">Transaction API</label>
+<div style="margin-left: 10px; margin-top: 10px;">
+    <a href="/v1/transactions/new" class="btn btn-warning">Create Transaction</a>
+</div>
+
+<div class="modal fade" id="getBookByIdModal" tabindex="-1" role="dialog" aria-labelledby="getBookByIdModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="getBookById" method="get" onsubmit="makeRequest(this)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="getBookByIdModalLabel">Get Book By Id</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="getBookId" class="form-label">Book Id</label>
+                    <input type="text" class="form-control" id="getBookId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="getBookSubmit" type="submit" class="btn btn-primary">
+                        Get Book
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteBookByIdModal" tabindex="-1" role="dialog" aria-labelledby="getBookByIdModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="deleteBookById" onsubmit="makeRequest(this)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteBookByIdModalLabel">Delete Book By Id</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="deleteBookId" class="form-label">Book Id</label>
+                    <input type="text" class="form-control" id="deleteBookId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="deleteBookSubmit" type="submit" class="btn btn-danger">
+                        Delete Book
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="getBooksByGenreModal" tabindex="-1" role="dialog" aria-labelledby="getBookByIdModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="getBooksByGenre" onsubmit="makeRequest(this)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="getBooksByGenreModalLabel">Delete Book By Id</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="bookGenre" class="form-label">Book Genre</label>
+                    <select class="form-select" aria-label="Default select example" id="bookGenre">
+                        <option th:each="genreOpt : ${T(ro.unibuc.fmi.javabookstoreproject.model.Genre).values()}"
+                                th:value="${genreOpt.name()}" th:text="${genreOpt}"></option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="getBooksByGenreSubmit" type="submit" class="btn btn-primary">
+                        Get Books
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="getAccountByIdModal" tabindex="-1" role="dialog" aria-labelledby="getAccountByIdModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="getAccountById" method="get" onsubmit="makeRequest(this)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="getAccountByIdModalLabel">Get Account By Id</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="getAccountId" class="form-label">Account Id</label>
+                    <input type="text" class="form-control" id="getAccountId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="getAccountSubmit" type="submit" class="btn btn-primary">
+                        Get Account
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteAccountByIdModal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteBookByIdModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="deleteAccountById" onsubmit="makeRequest(this)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAccountByIdModalLabel">Delete Account By Id</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="deleteAccountId" class="form-label">Account Id</label>
+                    <input type="text" class="form-control" id="deleteAccountId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="deleteAccountSubmit" type="submit" class="btn btn-danger">
+                        Delete Account
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateAccountEmailModal" tabindex="-1" role="dialog"
+     aria-labelledby="updateAccountEmailModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="updateAccountEmail" onsubmit="makeRequest(this)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateAccountEmailModalLabel">Delete Account By Id</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="accountId" class="form-label">Account Id</label>
+                    <input type="text" class="form-control" id="accountId">
+                    <label for="accountEmail" class="form-label">Account Email</label>
+                    <input type="text" class="form-control" id="accountEmail">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="updateAccountEmailSubmit" type="submit" class="btn btn-primary">
+                        Update Email
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="getAuthorByIdModal" tabindex="-1" role="dialog" aria-labelledby="getAuthorByIdModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="getAuthorById" method="get" onsubmit="makeRequest(this)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="getAuthorByIdModalLabel">Get Author By Id</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="getAuthorId" class="form-label">Author Id</label>
+                    <input type="text" class="form-control" id="getAuthorId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="getAuthorSubmit" type="submit" class="btn btn-primary">
+                        Get Author
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteAuthorByIdModal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteBookByIdModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="deleteAuthorById" onsubmit="makeRequest(this)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAuthorByIdModalLabel">Delete Author By Id</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="deleteAuthorId" class="form-label">Author Id</label>
+                    <input type="text" class="form-control" id="deleteAuthorId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="deleteAuthorSubmit" type="submit" class="btn btn-danger">
+                        Delete Author
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="getPublisherByIdModal" tabindex="-1" role="dialog"
+     aria-labelledby="getPublisherByIdModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="getPublisherById" method="get" onsubmit="makeRequest(this)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="getPublisherByIdModalLabel">Get Publisher By Id</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="getPublisherId" class="form-label">Publisher Id</label>
+                    <input type="text" class="form-control" id="getPublisherId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="getPublisherSubmit" type="submit" class="btn btn-primary">
+                        Get Publisher
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deletePublisherByIdModal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteBookByIdModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="deletePublisherById" onsubmit="makeRequest(this)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deletePublisherByIdModalLabel">Delete Publisher By Id</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="deletePublisherId" class="form-label">Publisher Id</label>
+                    <input type="text" class="form-control" id="deletePublisherId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="deletePublisherSubmit" type="submit" class="btn btn-danger">
+                        Delete Publisher
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    function makeRequest(form) {
+
+        var formId = form.getAttribute("id");
+
+        switch (formId) {
+            case "getBookById":
+                document.getElementById(formId).action = "/v1/books/" + document.getElementById('getBookId').value;
+                break;
+            case "getBooksByGenre":
+                document.getElementById(formId).action = "/v1/books/genre/" + document.getElementById('bookGenre').value;
+                break;
+            case "deleteBookById":
+                fetch("/v1/books/" + document.getElementById('deleteBookId').value, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                })
+                    .then(res => console.log(res));
+                break;
+            case "getAccountById":
+                document.getElementById(formId).action = "/v1/accounts/" + document.getElementById('getAccountId').value;
+                break;
+            case "deleteAccountById":
+                fetch("/v1/accounts/" + document.getElementById('deleteAccountId').value, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                })
+                    .then(res => console.log(res));
+                break;
+            case "updateAccountEmail":
+                fetch("/v1/accounts/" + document.getElementById('accountId').value + "?email=" + document.getElementById('accountEmail').value, {
+                    method: "PUT",
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                })
+                    .then(res => console.log(res));
+                break;
+            case "getAuthorById":
+                document.getElementById(formId).action = "/v1/authors/" + document.getElementById('getAuthorId').value;
+                break;
+            case "deleteAuthorById":
+                fetch("/v1/authors/" + document.getElementById('deleteAuthorId').value, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                })
+                    .then(res => console.log(res));
+                break;
+            case "getPublisherById":
+                document.getElementById(formId).action = "/v1/publishers/" + document.getElementById('getPublisherId').value;
+                break;
+            case "deletePublisherById":
+                fetch("/v1/publishers/" + document.getElementById('deletePublisherId').value, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                })
+                    .then(res => console.log(res));
+                break;
+            default:
+                break;
+        }
+
+
+    }
+
+</script>
+
+<script>
+    $('#getBookByIdModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    $('#deleteBookByIdModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    $('#getBooksByGenreModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    $('#getAccountByIdModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    $('#deleteAccountByIdModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    $('#updateAccountEmailModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    $('#getAccountByIdModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    $('#deleteAuthorByIdModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    $('#getPublisherByIdModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    $('#deletePublisherByIdModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+</script>
+
+
+</body>
+</html>

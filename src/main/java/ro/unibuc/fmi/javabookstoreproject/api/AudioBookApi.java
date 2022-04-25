@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import ro.unibuc.fmi.javabookstoreproject.exception.ApiError;
 import ro.unibuc.fmi.javabookstoreproject.model.AudioBook;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Tag(name = "audioBooks", description = "AudioBook API")
@@ -27,7 +28,7 @@ public interface AudioBookApi {
     @PostMapping(value = "/audioBooks",
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    void createAudioBook(@Parameter(description = "Supplied AudioBook for creation", required = true) @RequestBody AudioBook audioBook);
+    void createAudioBook(@Parameter(description = "Supplied AudioBook for creation", required = true) @RequestBody @Valid AudioBook audioBook);
 
     @Operation(summary = "Find audioBook by ID", operationId = "getAudioBookById", description = "Returns a single AudioBook", tags = {"audioBooks"})
     @ApiResponses(value = {

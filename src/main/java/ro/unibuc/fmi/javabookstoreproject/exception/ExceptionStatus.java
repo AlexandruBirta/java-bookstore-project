@@ -3,9 +3,9 @@ package ro.unibuc.fmi.javabookstoreproject.exception;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.springframework.http.HttpStatus;
-import ro.unibuc.fmi.javabookstoreproject.model.Book;
-import ro.unibuc.fmi.javabookstoreproject.model.Review;
-import ro.unibuc.fmi.javabookstoreproject.model.Transaction;
+import ro.unibuc.fmi.javabookstoreproject.model.Genre;
+import ro.unibuc.fmi.javabookstoreproject.model.Rating;
+import ro.unibuc.fmi.javabookstoreproject.model.TransactionType;
 
 import java.util.Arrays;
 
@@ -29,9 +29,9 @@ public enum ExceptionStatus {
     TRANSACTION_NOT_FOUND("Transaction with ID '%s' not found!", HttpStatus.NOT_FOUND),
     ACCOUNT_BOOK_NOT_FOUND("Account book with ID '%s' not found!", HttpStatus.NOT_FOUND),
     ACCOUNT_BOOK_ALREADY_EXISTS("Account book for account ID and book ISBN '%s' already exists!", HttpStatus.BAD_REQUEST),
-    INVALID_GENRE("Invalid genre '%s'. Genre must be one of " + Arrays.toString(Book.Genre.values()), HttpStatus.NOT_FOUND),
-    INVALID_RATING("Invalid rating '%s'. Rating must be one of " + Arrays.toString(Review.Rating.values()), HttpStatus.NOT_FOUND),
-    INVALID_TRANSACTION_TYPE("Invalid transaction type '%s'. Transaction type must be one of " + Arrays.toString(Transaction.Type.values()), HttpStatus.NOT_FOUND);
+    INVALID_GENRE("Invalid genre '%s'. Genre must be one of " + Arrays.toString(Genre.values()), HttpStatus.NOT_FOUND),
+    INVALID_RATING("Invalid rating '%s'. Rating must be one of " + Arrays.toString(Rating.values()), HttpStatus.NOT_FOUND),
+    INVALID_TRANSACTION_TYPE("Invalid transaction type '%s'. Transaction type must be one of " + Arrays.toString(TransactionType.values()), HttpStatus.NOT_FOUND);
 
     private final String value;
     private final HttpStatus httpStatus;

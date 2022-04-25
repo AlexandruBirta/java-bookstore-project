@@ -7,7 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -46,7 +46,7 @@ public class Narrator {
             fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE
     )
-    private List<AudioBook> audioBook;
+    private Set<AudioBook> audioBook;
 
     @Schema
     @Column(nullable = false)

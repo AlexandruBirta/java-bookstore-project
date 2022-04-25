@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import ro.unibuc.fmi.javabookstoreproject.exception.ApiError;
 import ro.unibuc.fmi.javabookstoreproject.model.Narrator;
 
+import javax.validation.Valid;
+
 @Tag(name = "narrators", description = "Narrator API")
 @Validated
 @RequestMapping(value = "/v1")
@@ -25,7 +27,7 @@ public interface NarratorApi {
     @PostMapping(value = "/narrators",
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    void createNarrator(@Parameter(description = "Supplied Narrator for creation", required = true) @RequestBody Narrator narrator);
+    void createNarrator(@Parameter(description = "Supplied Narrator for creation", required = true) @RequestBody @Valid Narrator narrator);
 
     @Operation(summary = "Find narrator by ID", operationId = "getNarratorById", description = "Returns a single Narrator", tags = {"narrators"})
     @ApiResponses(value = {

@@ -38,7 +38,7 @@ public class AudioBook {
     @Schema(required = true)
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Book.Genre genre;
+    private Genre genre;
 
     @Schema(maximum = "13", required = true)
     @Column(nullable = false)

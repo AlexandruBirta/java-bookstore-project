@@ -8,10 +8,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ro.unibuc.fmi.javabookstoreproject.exception.ApiError;
 import ro.unibuc.fmi.javabookstoreproject.model.Account;
+
+import javax.validation.Valid;
 
 @Tag(name = "accounts", description = "Account API")
 @Validated
@@ -25,7 +28,16 @@ public interface AccountApi {
     @PostMapping(value = "/accounts",
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    void createAccount(@Parameter(description = "Supplied Account for creation", required = true) @RequestBody Account account);
+    String createAccount(@Parameter(description = "Supplied Account for creation", required = true) @ModelAttribute @Valid Account account);
+
+    @Operation(summary = "Creates an account", operationId = "createAccount", tags = {"accounts"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "400", description = "Account already exists", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)))})
+    @GetMapping(value = "/accounts/new",
+            produces = {"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    String createNewAccount(Model model);
 
     @Operation(summary = "Find account by ID", operationId = "getAccountById", description = "Returns a single Account", tags = {"accounts"})
     @ApiResponses(value = {
@@ -34,7 +46,7 @@ public interface AccountApi {
     @GetMapping(value = "/accounts/{accountId}",
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    Account getAccountById(@Parameter(description = "ID of Account to return", required = true) @PathVariable("accountId") Long accountId);
+    String getAccountById(@Parameter(description = "ID of Account to return", required = true) @PathVariable("accountId") Long accountId, Model model);
 
     @Operation(summary = "Deletes an account", operationId = "deleteAccount", tags = {"accounts"})
     @ApiResponses(value = {

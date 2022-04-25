@@ -8,13 +8,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import ro.unibuc.fmi.javabookstoreproject.exception.ApiError;
 import ro.unibuc.fmi.javabookstoreproject.model.Transaction;
+
+import javax.validation.Valid;
 
 @Tag(name = "transactions", description = "Transaction API")
 @Validated
@@ -28,6 +28,15 @@ public interface TransactionApi {
     @PostMapping(value = "/transactions",
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    void makeTransaction(@Parameter(description = "Supplied Transaction", required = true) @RequestBody Transaction transaction);
+    String makeTransaction(@Parameter(description = "Supplied Transaction", required = true) @ModelAttribute @Valid Transaction transaction);
+
+    @Operation(summary = "Makes a transaction associated with an account", operationId = "makeTransaction", tags = {"accounts"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "404", description = "Account not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)))})
+    @GetMapping(value = "/transactions/new",
+            produces = {"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    String makeTransaction(Model model);
 
 }

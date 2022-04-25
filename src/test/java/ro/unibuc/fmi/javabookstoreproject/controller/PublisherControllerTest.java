@@ -69,7 +69,7 @@ public class PublisherControllerTest {
         ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
         String requestJson = objectWriter.writeValueAsString(testPublisher);
 
-        mockMvc.perform(put(endpoint).contentType(APPLICATION_JSON_UTF8).content(requestJson))
+        mockMvc.perform(post(endpoint).contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

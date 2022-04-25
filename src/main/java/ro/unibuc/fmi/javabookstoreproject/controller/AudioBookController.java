@@ -1,14 +1,15 @@
 package ro.unibuc.fmi.javabookstoreproject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 import ro.unibuc.fmi.javabookstoreproject.api.AudioBookApi;
 import ro.unibuc.fmi.javabookstoreproject.model.AudioBook;
 import ro.unibuc.fmi.javabookstoreproject.service.AudioBookService;
 
+import javax.validation.Valid;
 import java.util.List;
 
-@RestController
+@Controller
 public class AudioBookController implements AudioBookApi {
 
     private final AudioBookService audioBookService;
@@ -19,7 +20,7 @@ public class AudioBookController implements AudioBookApi {
     }
 
     @Override
-    public void createAudioBook(AudioBook audioBook) {
+    public void createAudioBook(@Valid AudioBook audioBook) {
         audioBookService.createAudioBook(audioBook);
     }
 

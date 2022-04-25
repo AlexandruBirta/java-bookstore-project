@@ -95,7 +95,7 @@ public class QuartzService {
 
                 Trigger trigger = newTrigger()
                         .withIdentity(transactionTriggerKey)
-                        .startAt(DateBuilder.futureDate(transaction.getRentalTime(), DateBuilder.IntervalUnit.SECOND))
+                        .startAt(DateBuilder.futureDate(transaction.getRentalTimeInDays(), DateBuilder.IntervalUnit.SECOND))
                         .forJob(RENTAL_JOB_KEY)
                         .build();
 

@@ -1,12 +1,14 @@
 package ro.unibuc.fmi.javabookstoreproject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 import ro.unibuc.fmi.javabookstoreproject.api.NarratorApi;
 import ro.unibuc.fmi.javabookstoreproject.model.Narrator;
 import ro.unibuc.fmi.javabookstoreproject.service.NarratorService;
 
-@RestController
+import javax.validation.Valid;
+
+@Controller
 public class NarratorController implements NarratorApi {
 
     private final NarratorService narratorService;
@@ -17,7 +19,7 @@ public class NarratorController implements NarratorApi {
     }
 
     @Override
-    public void createNarrator(Narrator narrator) {
+    public void createNarrator(@Valid Narrator narrator) {
         narratorService.createNarrator(narrator);
     }
 
